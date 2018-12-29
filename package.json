@@ -24,6 +24,7 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3",
+    "graphql-yoga": "^1.16.9",
     "mongoose": "^5.4.1"
   }
 }

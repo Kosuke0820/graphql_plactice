@@ -1,24 +1,19 @@
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
 import mongoose from 'mongoose';
+import { GraphQLServer } from 'graphql-yoga';
+// import schema from './schema';
+import graphqlConfig from './api';
 
-import schema from './schema';
-
+const PORT = 3000;
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/gql_db', { useNewUrlParser: true });
 
-const app = express();
-const PORT = 3000;
+const options = {
+  tracing: true,
+  debug: true,
+  port: PORT,
+  endpoint: '/graphql',
+  playground: '/docs'
+}
 
-app.get('/', (req, res) => {
-  return res.send('Hello GraphQL!');
-});
-
-app.use('/graphql', graphqlHTTP({
-  schema,
-  graphiql: true,
-}))
-
-app.listen(PORT, () => {
-  console.log(`Server is Running at PORT ${PORT}`);
-})
+const server = new GraphQLServer(graphqlConfig);
+server.start(options, () => console.log(`Server is Runnning at ${PORT}`));
