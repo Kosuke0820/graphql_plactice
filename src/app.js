@@ -17,9 +17,6 @@ app.get('/', (req, res) => {
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
-  context: {
-    user: 1,
-  }
 }))
 
 app.listen(PORT, () => {
